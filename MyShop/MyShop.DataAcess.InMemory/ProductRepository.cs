@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using System.Runtime.Caching;
 using MyShop.Core.Models;
 
-namespace MyShop.DataAcess.InMemory
+namespace MyShop.DataAccess.InMemory
 {
     public class ProductRepository
     {
         ObjectCache cache = MemoryCache.Default;
-        List<Product> products = new List<Product>();
+        List<Product> products;
 
         public ProductRepository()
         {
@@ -24,7 +24,7 @@ namespace MyShop.DataAcess.InMemory
 
         public void Commit()
         {
-            cache["product"] = products;
+            cache["products"] = products;
         }
 
         public void Insert(Product p)
@@ -49,7 +49,7 @@ namespace MyShop.DataAcess.InMemory
             Product productToUpdate = products.Find(p => p.Id == Id);
             if (productToUpdate != null)
             {
-                return product;
+                return productToUpdate;
             }
             else
             {
